@@ -1,0 +1,41 @@
+{
+  "title": "log-interceptor",
+  "name": "log-interceptor",
+  "version": "0.0.0",
+  "homepage": "https://github.com/roeldev/log-interceptor",
+  "description": "Intercepts output from console.log()",
+  "license": "GPL-2.0+",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/roeldev/log-interceptor.git"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "scripts": {
+    "setup": "npm install",
+    "start": "npm install && gulp watch",
+    "test": "mocha --reporter spec --check-leaks",
+    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.2",
+    "gulp": "^3.8.11",
+    "gulp-jscs": "^1.5.2",
+    "gulp-jscs-stylish": "^1.1.0",
+    "gulp-jshint": "^1.10.0",
+    "gulp-mocha": "^2.0.1",
+    "istanbul": "^0.3.13",
+    "jscs": "^1.12.0",
+    "jshint": "^2.7.0",
+    "jshint-stylish": "^1.0.1",
+    "mocha": "^2.2.4",
+    "mocha-lcov-reporter": "0.0.2",
+    "run-sequence": "^1.0.2"
+  },
+  "keywords": [
+  ]
+}
