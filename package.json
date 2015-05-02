@@ -20,6 +20,8 @@
     "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks"
   },
   "dependencies": {
+    "chalk": "^1.0.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
@@ -36,6 +38,5 @@
     "mocha-lcov-reporter": "0.0.2",
     "run-sequence": "^1.0.2"
   },
-  "keywords": [
-  ]
+  "keywords": []
 }
