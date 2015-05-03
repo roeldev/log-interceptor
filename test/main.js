@@ -1,6 +1,6 @@
 /**
  * log-interceptor | test/main.js
- * file version: 0.00.001
+ * file version: 0.00.002
  */
 'use strict';
 
@@ -99,6 +99,55 @@ describe('LogInterceptor()', function logInterceptorTests()
             ['test1\n', 'test2\n', 'test3\n'],
             ['test1\n', 'test2\n', 'test3\n'],
             ['test2\n', 'test3\n']
+        ]);
+    });
+});
+
+describe('LogInterceptor.end()', function logInterceptorEndTests()
+{
+    it('should return false when no session to end', function()
+    {
+        Assert.strictEqual(LogInterceptor.end(), false);
+    });
+});
+
+describe('LogInterceptor.endAll()', function logInterceptorEndAllTests()
+{
+    it('should return false when no sessions to end', function()
+    {
+        Assert.strictEqual(LogInterceptor.endAll(), false);
+    });
+});
+
+describe('readme examples', function readmeExamples()
+{
+    it('should succeed the `How to use` example', function()
+    {
+        LogInterceptor();
+
+        console.log('log 1');
+        console.log('log 2');
+
+        Assert.deepEqual(LogInterceptor.end(), ['log 1\n', 'log 2\n']);
+    });
+
+    it('should succeed the `logInterceptor.endAll() API` example', function()
+    {
+        // level1
+        LogInterceptor();
+
+        console.log('log 1');
+
+        // level2: pass output down to level1
+        LogInterceptor(true);
+
+        console.log('log 2');
+        console.log('log 3');
+
+        Assert.deepEqual(LogInterceptor.endAll(),
+        [
+            ['log 1\n', 'log 2\n', 'log 3\n'],
+            ['log 2\n', 'log 3\n']
         ]);
     });
 });
