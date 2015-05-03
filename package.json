@@ -1,7 +1,7 @@
 {
   "title": "log-interceptor",
   "name": "log-interceptor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/roeldev/log-interceptor",
   "description": "Intercepts output from console.log()",
   "license": "GPL-2.0+",
@@ -38,5 +38,16 @@
     "mocha-lcov-reporter": "0.0.2",
     "run-sequence": "^1.0.2"
   },
-  "keywords": []
+  "keywords": [
+    "log",
+    "console",
+    "console log",
+    "intercept",
+    "interceptor"
+    "intercepting"
+    "stdout",
+    "hook",
+    "test",
+    "testing",
+  ]
 }
