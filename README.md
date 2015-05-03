@@ -51,7 +51,7 @@ var result = ['log 1\n', 'log 2\n'];
 
 
 ### logInterceptor(callbackFn)
-Starts the log interceptor. It is possible to handle the intercepted output by provinding your own custom callback function.
+Starts the log interceptor. It is possible to handle the intercepted output by providing your own custom callback function.
 
 If you want to display the output, or pass it down to a level below, let the callback function return `true`:
 ```js
