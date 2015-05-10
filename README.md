@@ -50,18 +50,26 @@ var result = ['log 1\n', 'log 2\n'];
 - [logInterceptor.endAll()][api-loginterceptor-endall]
 
 
-### logInterceptor(callbackFn)
-Starts the log interceptor. It is possible to handle the intercepted output by providing your own custom callback function.
+### logInterceptor(options)
+Starts the log interceptor. It is possible to auto format the intercepted output by using the following options:
 
-If you want to display the output, or pass it down to a level below, let the callback function return `true`:
+option | type | description
+------ | ---- | -----------
+passdown | `boolean` | Pass the intercepted output down to the next interceptor, or display it when the first level is reached.
+stripColors | `boolean` | Strip colors of the intercepted output.
+trimTimestamp | `boolean` | Check if the output starts with a timestamp (`[00:00:00]`). If that's the case, remove it.
+trimLinebreak | `boolean` | Trim last linebreak, this will not touch linebreaks somewhere in the middle of the output.
+splitOnLinebreaks | `boolean` | Split the output and add multiple entries to the end log. Linebreaks on the end of the output will not be used to split.
+
+By providing your own custom callback function, you can whatever you want with the intercepted output. If you want to display the output, or pass it down to a level below, let the callback function return `true`:
 ```js
-logInterceptor(function()
+logInterceptor(function(interceptedOutputString)
 {
     return true;
 });
 ```
 
-Or use the short version by only passing `true`:
+Or if you only want to log the output, but still want to pass it down to the level below:
 ```js
 logInterceptor(true);
 ```
