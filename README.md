@@ -55,7 +55,7 @@ Starts the log interceptor. It is possible to auto format the intercepted output
 
 option | type | description
 ------ | ---- | -----------
-passdown | `boolean` | Pass the intercepted output down to the next interceptor, or display it when the first level is reached.
+passDown | `boolean` | Pass the intercepted output down to the next interceptor, or display it when the first level is reached.
 stripColors | `boolean` | Strip colors of the intercepted output.
 trimTimestamp | `boolean` | Check if the output starts with a timestamp (`[00:00:00]`). If that's the case, remove it.
 trimLinebreak | `boolean` | Trim last linebreak, this will not touch linebreaks somewhere in the middle of the output.

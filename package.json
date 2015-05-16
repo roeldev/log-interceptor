@@ -20,7 +20,7 @@
     "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks"
   },
   "dependencies": {
-    "chalk": "^1.0.0",
+    "strip-ansi": "^2.0.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
@@ -30,6 +30,7 @@
     "gulp-jscs-stylish": "^1.1.0",
     "gulp-jshint": "^1.10.0",
     "gulp-mocha": "^2.0.1",
+    "gulp-util": "^3.0.4",
     "istanbul": "^0.3.13",
     "jscs": "^1.12.0",
     "jshint": "^2.7.0",
