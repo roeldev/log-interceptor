@@ -55,7 +55,7 @@ var result = ['log 1\n', 'log 2\n'];
 ### logInterceptor([options][, callbackFn])
 Starts the log interceptor. Both the `options` and `callbackFn` arguments are optional. When they are both not specified, the default behavior is to intercept the output and return an array with the [`end()`][api-loginterceptor-end] function.
 
-##### options
+##### - options
 The default options are set in the `logInterceptor.defaultOptions` object. These options are used to auto format the intercepted output, or pass it to a level below. You can override the default values by passing your own object to the function:
 
 option | type | default | description
@@ -75,7 +75,7 @@ logInterceptor(true);
 logInterceptor({ 'passDown': true });
 ```
 
-##### callbackFn
+##### - callbackFn
 By providing your own custom callback function, you can do whatever you want with the intercepted output. If you want to display the output (with only one level active), or pass it down to a level below, let the callback function return `true`. If you don't want that, let it return `false`. When you do not return a value, the default value from the `passDown` option is used instead.
 ```js
 var customOutputLog = [];
@@ -136,16 +136,16 @@ The utility functions are available in the `logInterceptor.utils` object and in 
 - [trimLinebreak()][utils-trimlinebreak]
 - [splitOnLinebreak()][utils-splitonlinebreak]
 
-### stripColor(str)
+### logInterceptor.utils.stripColor(str)
 Strips the Ansi colors from the string with _strip-ansi_ and returns the new string.
 
-### trimTimestamp(str[, checkColors = true])
+### logInterceptor.utils.trimTimestamp(str[, checkColors = true])
 Trims timestamps (eg. `[00:00:00]`) from the beginning of the string and returns the new string. When `checkColors` is not `false`, the function will also check for color coded timestamps wich are created with _gulp-util_'s `log` function.
 
-### trimLinebreak(str)
+### logInterceptor.utils.trimLinebreak(str)
 Trims linebreaks (`\n`) from the end of the string and returns the new string.
 
-### splitOnLinebreak(str[, trimLineBreaks = false])
+### logInterceptor.utils.splitOnLinebreak(str[, trimLineBreaks = false])
 Splits the string on linebreaks (`str.split('\n')`) not on the end of the string and returns an array. When `trimLinebreaks` equals `true`, a single linebreak is put back on the end of all array values.
 
 
@@ -154,12 +154,12 @@ Splits the string on linebreaks (`str.split('\n')`) not on the end of the string
 
 [section-utilityfunctions]: #utilityfunctions
 
-[api-loginterceptor]: #loginterceptorcallbackfn
+[api-loginterceptor]: #loginterceptoroptions-callbackfn
 [api-loginterceptor-end]: #loginterceptorend
 [api-loginterceptor-endall]: #loginterceptorendall
 [api-loginterceptor-write]: #loginterceptorwritestr
 
-[utils-stripcolor]: #stripcolorstr
-[utils-trimtimestamp]: #trimtimestampstrcheckcolorstrue
-[utils-trimlinebreak]: #trimlinebreakstr
-[utils-splitonlinebreak]: #splitonlinebreaktrtrimlinebreaksfalse
+[utils-stripcolor]: #loginterceptorutilsstripcolorstr
+[utils-trimtimestamp]: #loginterceptorutilstrimtimestampstr-checkcolors--true
+[utils-trimlinebreak]: #loginterceptorutilstrimlinebreakstr
+[utils-splitonlinebreak]: #loginterceptorutilssplitonlinebreakstr-trimlinebreaks--false
