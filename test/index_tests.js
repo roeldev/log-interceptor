@@ -1,6 +1,6 @@
 /**
- * log-interceptor | test/main.js
- * file version: 0.00.002
+ * log-interceptor | test/index_tests.js
+ * file version: 0.00.003
  */
 'use strict';
 
@@ -8,6 +8,17 @@ var Assert         = require('assert');
 var LogInterceptor = require('../lib/index.js');
 
 ////////////////////////////////////////////////////////////////////////////////
+
+LogInterceptor.defaultOptions =
+{
+    'passDown':         false,
+    'stripColor':       false,
+    'trimTimestamp':    false,
+    'trimLinebreak':    false,
+    'splitOnLinebreak': false
+};
+
+//------------------------------------------------------------------------------
 
 describe('LogInterceptor()', function logInterceptorTests()
 {
@@ -40,7 +51,7 @@ describe('LogInterceptor()', function logInterceptorTests()
         console.log('test1');
         console.log('test2');
 
-        Assert.deepEqual(LogInterceptor.endAll(), ['test1\n', 'test2\n']);
+        Assert.deepEqual(LogInterceptor.endAll(), [['test1\n', 'test2\n']]);
     });
 
     it('should intercept and execute the callback function', function()
@@ -55,6 +66,16 @@ describe('LogInterceptor()', function logInterceptorTests()
         console.log('test2');
 
         Assert.deepEqual(LogInterceptor.end(), $expected);
+    });
+
+    it('should intercept and not execute the callback var ', function()
+    {
+        LogInterceptor({}, false);
+
+        console.log('test1');
+        console.log('test2');
+
+        Assert.deepEqual(LogInterceptor.endAll(), [['test1\n', 'test2\n']]);
     });
 
     it('should intercept on multiple levels', function()
@@ -94,12 +115,36 @@ describe('LogInterceptor()', function logInterceptorTests()
         console.log('test2');
         console.log('test3');
 
-        Assert.deepEqual(LogInterceptor.endAll(),
+        var $actual = LogInterceptor.endAll();
+
+        Assert.deepEqual($actual,
         [
             ['test1\n', 'test2\n', 'test3\n'],
             ['test1\n', 'test2\n', 'test3\n'],
             ['test2\n', 'test3\n']
         ]);
+    });
+});
+
+describe('LogInterceptor._debug()', function logInterceptorDebugTests()
+{
+    it('should write the debug message', function()
+    {
+        var $logInterceptorWriter = LogInterceptor.write;
+        var $actual;
+
+        // temporary overwrite write function
+        LogInterceptor.write = function($str)
+        {
+            $actual = $str;
+        };
+
+        LogInterceptor._debug('debug', 'test');
+
+        // restore original write function
+        LogInterceptor.write = $logInterceptorWriter;
+
+        Assert.strictEqual($actual, 'debug, test\n');
     });
 });
 
