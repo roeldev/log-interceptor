@@ -23,7 +23,7 @@ LogInterceptor.defaultOptions =
 
 //------------------------------------------------------------------------------
 
-describe('Utils.stripColor()', function utilsStripColorTests()
+describe('Utils.stripColor()', function stripColorTests()
 {
     it('should strip the colors', function()
     {
@@ -40,7 +40,7 @@ describe('Utils.stripColor()', function utilsStripColorTests()
     });
 });
 
-describe('Utils.trimTimestamp()', function utilsTrimTimestampTests()
+describe('Utils.trimTimestamp()', function trimTimestampTests()
 {
     it('should trim the timestamp', function()
     {
@@ -67,7 +67,7 @@ describe('Utils.trimTimestamp()', function utilsTrimTimestampTests()
     });
 });
 
-describe('Utils.trimLinebreak()', function utilsTrimLinebreakTests()
+describe('Utils.trimLinebreak()', function trimLinebreakTests()
 {
     it('should trim the linebreak at the end [1]', function()
     {
@@ -98,7 +98,7 @@ describe('Utils.trimLinebreak()', function utilsTrimLinebreakTests()
     });
 });
 
-describe('Utils.splitOnLinebreak()', function utilsSplitOnLinebreakTests()
+describe('Utils.splitOnLinebreak()', function splitOnLinebreakTests()
 {
     it('should split the string and return an array', function()
     {

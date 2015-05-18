@@ -68,6 +68,16 @@ describe('LogInterceptor()', function logInterceptorTests()
         Assert.deepEqual(LogInterceptor.end(), $expected);
     });
 
+    it('should intercept and not execute the callback var ', function()
+    {
+        LogInterceptor({}, false);
+
+        console.log('test1');
+        console.log('test2');
+
+        Assert.deepEqual(LogInterceptor.endAll(), [['test1\n', 'test2\n']]);
+    });
+
     it('should intercept on multiple levels', function()
     {
         // level 1
@@ -113,6 +123,28 @@ describe('LogInterceptor()', function logInterceptorTests()
             ['test1\n', 'test2\n', 'test3\n'],
             ['test2\n', 'test3\n']
         ]);
+    });
+});
+
+describe('LogInterceptor._debug()', function logInterceptorDebugTests()
+{
+    it('should write the debug message', function()
+    {
+        var $logInterceptorWriter = LogInterceptor.write;
+        var $actual;
+
+        // temporary overwrite write function
+        LogInterceptor.write = function($str)
+        {
+            $actual = $str;
+        };
+
+        LogInterceptor._debug('debug', 'test');
+
+        // restore original write function
+        LogInterceptor.write = $logInterceptorWriter;
+
+        Assert.strictEqual($actual, 'debug, test\n');
     });
 });
 
