@@ -19,9 +19,9 @@
 
 **Intercepts output from console.log()**
 
-This module is very useful if you want to test the output written to `console.log`. It intercepts the output, allows for a custom callback function to handle the output, and returns all intercepted output when the `end()` function is called.
+This module is very useful if you want to test the output written to `console.log`. It intercepts the output, allows for a custom callback function to handle the output, and returns all intercepted output when the [`end()`][api-loginterceptor-end] function is called.
 
-Inspired by PHP's [Output Control functions][url-php-oc] and the testcase from [_jshint-stylish_][url-test].
+Inspired by PHP's [Output Control functions][url-php-oc] and the [testcase][url-test] from [_jshint-stylish_][url-jshint-stylish].
 
 
 ## Installation
@@ -77,7 +77,7 @@ argument | type | description
 _options_ | `object` or `boolean` | Options wich override the default options for this level.
 _callbackFn_ | `function` | See below for detailed description.
 
-#### callbackFn(originalStr, formattedStr)
+#### _callbackFn(originalStr, formattedStr)_
 By providing your own custom callback function, you can do whatever you want with the intercepted output. The original and formatted intercepted output strings are provided as the first and second argument.
 
 argument | type | description
@@ -129,7 +129,7 @@ _options_ | `object` | The object to extend the default config object with.
 
 --------------------------------------------------------------------------------
 ### logInterceptor.end()
-Ends the current intercept session. Returns an `array` with intercepted output. When no more sessions are active, the original `process.stdout.write` function is restored.
+Ends the current intercept session. Returns an `array` with intercepted output. When no more sessions are active, the original [`process.stdout.write`][url-stdout] function is restored.
 
 ```js
 // start intercept and allow to pass down to `process.stdout.write`
@@ -145,7 +145,7 @@ var result = ['log 1\n', 'log 2\n'];
 
 --------------------------------------------------------------------------------
 ### logInterceptor.endAll()
-Ends all intercept sessions and restores the original `process.stdout.write` function. Will return an `array` with all intercepted output from all active sessions that were not already ended, or `false` when no sessions where active.
+Ends all intercept sessions and restores the original [`process.stdout.write`][url-stdout] function. Will return an `array` with all intercepted output from all active sessions that were not already ended, or `false` when no sessions where active.
 
 ```js
 // level1
@@ -169,7 +169,7 @@ var result = [
 
 --------------------------------------------------------------------------------
 ### logInterceptor.write(str)
-If you do not want a string to be intercepted while _log-interceptor_ is active, use this function. It is basically a bound reference to the original `process.stdout.write`. This means by calling this function, the arguments are send to `process.stdout.write` with `process.stdout` as it's current scope (just like it should when calling the function without _log-interceptor_ changing stuff).
+If you do not want a string to be intercepted while _log-interceptor_ is active, use this function. It is basically a bound reference to the original `process.stdout.write`. This means by calling this function, the arguments are send to `process.stdout.write` with [`process.stdout`][url-stdout] as it's current scope (just like it should when calling the function without _log-interceptor_ changing stuff).
 
 argument | type | description
 ---------|------|------------
@@ -187,7 +187,7 @@ The utility functions are available in the `logInterceptor.utils` object and in 
 
 --------------------------------------------------------------------------------
 ### utils.stripColor(str)
-Strips the Ansi colors from the string with _strip-ansi_ and returns the new string.
+Strips the Ansi colors from the string with [_strip-ansi_][url-strip-ansi] and returns the new string.
 
 argument | type | description
 ---------|------|------------
@@ -195,7 +195,7 @@ _str_ | `string` | The string to strip the colors from.
 
 --------------------------------------------------------------------------------
 ### utils.trimTimestamp(str[, checkColors])
-Trims timestamps (eg. `[00:00:00]`) from the beginning of the string and returns the new string. When `checkColors` is not `false`, the function will also check for color coded timestamps wich are created with _gulp-util_'s `log` function.
+Trims timestamps (eg. `[00:00:00]`) from the beginning of the string and returns the new string. When `checkColors` is not `false`, the function will also check for color coded timestamps wich are created with [_gulp-util_][url-gulp-util]'s `log` function.
 
 argument | type | default | description
 ---------|------|---------|------------
@@ -222,6 +222,10 @@ _trimLinebreaks_ | `boolean` | `false` | Set to `true` if you want to add a sing
 
 [url-php-oc]: http://php.net/manual/en/ref.outcontrol.php
 [url-test]: https://github.com/sindresorhus/jshint-stylish/blob/master/test.js
+[url-stdout]: https://nodejs.org/api/process.html#process_process_stdout
+[url-jshint-stylish]: https://github.com/sindresorhus/jshint-stylish
+[url-strip-ansi]: https://github.com/sindresorhus/strip-ansi
+[url-gulp-util]: https://github.com/gulpjs/gulp-util
 
 [section-utilityfunctions]: #utility-functions
 
