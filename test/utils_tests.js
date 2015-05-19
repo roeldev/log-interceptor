@@ -51,12 +51,13 @@ describe('Utils.trimTimestamp()', function trimTimestampTests()
 
     it('should trim the colored timestamp', function()
     {
-        LogInterceptor();
+        LogInterceptor({ 'stripColor': false });
         GulpUtil.log('test');
 
-        var $input = LogInterceptor.end();
+        var $input  = LogInterceptor.end();
+        var $actual = Utils.trimTimestamp($input[0], true);
 
-        Assert.strictEqual(Utils.trimTimestamp($input[0], true), 'test\n');
+        Assert.strictEqual($actual, 'test\n');
     });
 
     it('should return the exact same string', function()
