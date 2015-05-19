@@ -1,6 +1,6 @@
 /**
  * log-interceptor | test/util_tests.js
- * file version: 0.00.001
+ * file version: 0.00.002
  */
 'use strict';
 
@@ -12,7 +12,7 @@ var Utils          = LogInterceptor.utils;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LogInterceptor.defaultOptions =
+LogInterceptor._config =
 {
     'passDown':         false,
     'stripColor':       false,

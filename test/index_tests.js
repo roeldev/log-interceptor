@@ -1,6 +1,6 @@
 /**
  * log-interceptor | test/index_tests.js
- * file version: 0.00.003
+ * file version: 0.00.004
  */
 'use strict';
 
@@ -9,7 +9,7 @@ var LogInterceptor = require('../lib/index.js');
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LogInterceptor.defaultOptions =
+LogInterceptor._config =
 {
     'passDown':         false,
     'stripColor':       false,
@@ -46,20 +46,34 @@ describe('LogInterceptor()', function logInterceptorTests()
 
     it('should intercept output from console.log [2]', function()
     {
-        LogInterceptor({});
+        LogInterceptor({ 'trimLinebreak': true });
 
         console.log('test1');
         console.log('test2');
 
-        Assert.deepEqual(LogInterceptor.endAll(), [['test1\n', 'test2\n']]);
+        Assert.deepEqual(LogInterceptor.endAll(), [['test1', 'test2']]);
     });
 
-    it('should intercept and execute the callback function', function()
+    it('should intercept and execute the callback function [1]', function()
     {
         var $expected = [];
         LogInterceptor(function($str)
         {
             $expected.push($str);
+        });
+
+        console.log('test1');
+        console.log('test2');
+
+        Assert.deepEqual(LogInterceptor.end(), $expected);
+    });
+
+    it('should intercept and execute the callback function [2]', function()
+    {
+        var $expected = [];
+        LogInterceptor({ 'trimLinebreak': true }, function($str, $str2)
+        {
+            $expected.push($str2[0]);
         });
 
         console.log('test1');
@@ -145,6 +159,79 @@ describe('LogInterceptor._debug()', function logInterceptorDebugTests()
         LogInterceptor.write = $logInterceptorWriter;
 
         Assert.strictEqual($actual, 'debug, test\n');
+    });
+});
+
+describe('LogInterceptor.config()', function logInterceptorConfigTests()
+{
+    it('should add the option to the default config [1]', function()
+    {
+        LogInterceptor.config('test', true);
+
+        Assert.strictEqual(LogInterceptor._config.test, true);
+    });
+
+    it('should add the option to the default config [2]', function()
+    {
+        delete LogInterceptor._config.test;
+
+        LogInterceptor.config('test', 1);
+
+        Assert.strictEqual(LogInterceptor._config.test, true);
+    });
+
+    it('should add the option to the default config [3]', function()
+    {
+        delete LogInterceptor._config.test;
+
+        LogInterceptor.config('test');
+
+        Assert.strictEqual(LogInterceptor._config.test, true);
+    });
+
+    it('should add the option to the default config [4]', function()
+    {
+        delete LogInterceptor._config.test;
+
+        LogInterceptor.config('test', false);
+
+        Assert.strictEqual(LogInterceptor._config.test, false);
+    });
+
+    it('should extend the default config', function()
+    {
+        LogInterceptor._config =
+        {
+            'passDown':         false,
+            'stripColor':       false,
+            'trimTimestamp':    false,
+            'trimLinebreak':    false,
+            'splitOnLinebreak': false
+        };
+
+        LogInterceptor.config({ 'stripColor': true, 'test': 'test' });
+
+        Assert.deepEqual(LogInterceptor._config,
+        {
+            'passDown':         false,
+            'stripColor':       true,
+            'trimTimestamp':    false,
+            'trimLinebreak':    false,
+            'splitOnLinebreak': false,
+            'test':             'test'
+        });
+    });
+
+    it('should return true on success', function()
+    {
+        delete LogInterceptor._config.test;
+
+        Assert.strictEqual(LogInterceptor.config('test', true), true);
+    });
+
+    it('should return false on failure', function()
+    {
+        Assert.strictEqual(LogInterceptor.config(false), false);
     });
 });
 
