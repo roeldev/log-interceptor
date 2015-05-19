@@ -68,6 +68,7 @@ splitOnLinebreak | `boolean` | `false` | Split the output and add multiple entri
 - [logInterceptor.endAll()][api-loginterceptor-endall]
 - [logInterceptor.write()][api-loginterceptor-write]
 
+--------------------------------------------------------------------------------
 ### logInterceptor([options][, callbackFn])
 Starts the log interceptor. Both the `options` and `callbackFn` arguments are optional. When they are both not specified, the default behavior is to intercept the output and return an array with the [`end()`][api-loginterceptor-end] function.
 
@@ -76,7 +77,7 @@ argument | type | description
 _options_ | `object` or `boolean` | Options wich override the default options for this level.
 _callbackFn_ | `function` | See below for detailed description.
 
-##### callbackFn(originalStr, formattedStr)
+#### callbackFn(originalStr, formattedStr)
 By providing your own custom callback function, you can do whatever you want with the intercepted output. The original and formatted intercepted output strings are provided as the first and second argument.
 
 argument | type | description
@@ -109,6 +110,7 @@ logInterceptor({ 'trimLinebreak': true }, function(str, formatted)
 });
 ```
 
+--------------------------------------------------------------------------------
 ### logInterceptor.config(option[, value])
 Allows for custom config options to be set to the default config object.
 
@@ -125,6 +127,7 @@ argument | type | description
 _options_ | `object` | The object to extend the default config object with.
 
 
+--------------------------------------------------------------------------------
 ### logInterceptor.end()
 Ends the current intercept session. Returns an `array` with intercepted output. When no more sessions are active, the original `process.stdout.write` function is restored.
 
@@ -140,6 +143,7 @@ var logs   = logInterceptor.end();
 var result = ['log 1\n', 'log 2\n'];
 ```
 
+--------------------------------------------------------------------------------
 ### logInterceptor.endAll()
 Ends all intercept sessions and restores the original `process.stdout.write` function. Will return an `array` with all intercepted output from all active sessions that were not already ended, or `false` when no sessions where active.
 
@@ -163,6 +167,7 @@ var result = [
 ];
 ```
 
+--------------------------------------------------------------------------------
 ### logInterceptor.write(str)
 If you do not want a string to be intercepted while _log-interceptor_ is active, use this function. It is basically a bound reference to the original `process.stdout.write`. This means by calling this function, the arguments are send to `process.stdout.write` with `process.stdout` as it's current scope (just like it should when calling the function without _log-interceptor_ changing stuff).
 
@@ -171,6 +176,7 @@ argument | type | description
 _str_ | `string` | The string to write.
 
 
+--------------------------------------------------------------------------------
 ## Utility functions
 The utility functions are available in the `logInterceptor.utils` object and in the scope of the callback function wich you can pass to [`logInterceptor()`][api-loginterceptor]. Ofcourse you can also use these functions in your own custom code.
 
@@ -179,6 +185,7 @@ The utility functions are available in the `logInterceptor.utils` object and in 
 - [utils.trimLinebreak()][utils-trimlinebreak]
 - [utils.splitOnLinebreak()][utils-splitonlinebreak]
 
+--------------------------------------------------------------------------------
 ### utils.stripColor(str)
 Strips the Ansi colors from the string with _strip-ansi_ and returns the new string.
 
@@ -186,7 +193,7 @@ argument | type | description
 ---------|------|------------
 _str_ | `string` | The string to strip the colors from.
 
-
+--------------------------------------------------------------------------------
 ### utils.trimTimestamp(str[, checkColors])
 Trims timestamps (eg. `[00:00:00]`) from the beginning of the string and returns the new string. When `checkColors` is not `false`, the function will also check for color coded timestamps wich are created with _gulp-util_'s `log` function.
 
@@ -195,7 +202,7 @@ argument | type | default | description
 _str_ | `string` | | The string to trim the timestamp from.
 _checkColors_ | `boolean` | `true` | Set to `false` if you do not want to check for color coded timestamps.
 
-
+--------------------------------------------------------------------------------
 ### utils.trimLinebreak(str)
 Trims linebreaks (`\n`) from the end of the string and returns the new string.
 
@@ -203,7 +210,7 @@ argument | type | description
 ---------|------|------------
 _str_ | `string` | The string to trim the linebreak(s) from.
 
-
+--------------------------------------------------------------------------------
 ### utils.splitOnLinebreak(str[, trimLinebreaks])
 Splits the string on linebreaks (`str.split('\n')`) not on the end of the string and returns an array.
 
