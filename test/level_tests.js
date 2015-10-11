@@ -95,7 +95,7 @@ describe('Level.formatAndLog()', function formatAndLogTests()
         GulpUtil.log('test');
 
         var $level = new Level({ 'trimTimestamp': true });
-        $level.formatAndLog(LogInterceptor.end()[0]);
+        $level.formatAndLog(LogInterceptor.end().join(''));
 
         Assert.deepEqual($level.log, ['test\n']);
     });

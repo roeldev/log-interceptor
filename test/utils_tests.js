@@ -55,7 +55,7 @@ describe('Utils.trimTimestamp()', function trimTimestampTests()
         GulpUtil.log('test');
 
         var $input  = LogInterceptor.end();
-        var $actual = Utils.trimTimestamp($input[0], true);
+        var $actual = Utils.trimTimestamp($input.join(''), true);
 
         Assert.strictEqual($actual, 'test\n');
     });
