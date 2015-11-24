@@ -4,20 +4,22 @@
   "version": "1.0.0",
   "homepage": "https://github.com/roeldev/log-interceptor",
   "description": "Intercepts output from console.log()",
+  "author": "Roel Schut (http://roelschut.nl)",
   "license": "GPL-2.0+",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/roeldev/log-interceptor.git"
   },
+  "bugs": "https://github.com/roeldev/log-interceptor/issues",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=0.12"
   },
   "scripts": {
     "setup": "npm install",
     "start": "npm install && gulp watch",
-    "test": "mocha --reporter spec --check-leaks",
-    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks"
+    "test": "mocha --reporter spec --check-leaks --globals store@sparkles",
+    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks --globals store@sparkles"
   },
   "dependencies": {
     "strip-ansi": "^3.0.0",

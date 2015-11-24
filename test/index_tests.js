@@ -1,16 +1,14 @@
 /**
  * log-interceptor | test/index_tests.js
- * file version: 0.00.004
  */
 'use strict';
 
 var Assert         = require('assert');
 var LogInterceptor = require('../lib/index.js');
 
-////////////////////////////////////////////////////////////////////////////////
+// -----------------------------------------------------------------------------
 
-LogInterceptor._config =
-{
+LogInterceptor._config = {
     'passDown':         false,
     'stripColor':       false,
     'trimTimestamp':    false,
@@ -18,11 +16,11 @@ LogInterceptor._config =
     'splitOnLinebreak': false
 };
 
-//------------------------------------------------------------------------------
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 describe('LogInterceptor()', function logInterceptorTests()
 {
-    it('should intercept output from console.log and display it', function()
+    it('intercept output from console.log and display it', function()
     {
         LogInterceptor(function()
         {
@@ -34,7 +32,7 @@ describe('LogInterceptor()', function logInterceptorTests()
         Assert.deepEqual(LogInterceptor.end(), ['test1\n']);
     });
 
-    it('should intercept output from console.log [1]', function()
+    it('intercept output from console.log [1]', function()
     {
         LogInterceptor(false);
 
@@ -44,7 +42,7 @@ describe('LogInterceptor()', function logInterceptorTests()
         Assert.deepEqual(LogInterceptor.end(), ['test1\n', 'test2\n']);
     });
 
-    it('should intercept output from console.log [2]', function()
+    it('intercept output from console.log [2]', function()
     {
         LogInterceptor({ 'trimLinebreak': true });
 
@@ -54,7 +52,7 @@ describe('LogInterceptor()', function logInterceptorTests()
         Assert.deepEqual(LogInterceptor.endAll(), [['test1', 'test2']]);
     });
 
-    it('should intercept and execute the callback function [1]', function()
+    it('intercept and execute the callback function [1]', function()
     {
         var $expected = [];
         LogInterceptor(function($str)
@@ -68,7 +66,7 @@ describe('LogInterceptor()', function logInterceptorTests()
         Assert.deepEqual(LogInterceptor.end(), $expected);
     });
 
-    it('should intercept and execute the callback function [2]', function()
+    it('intercept and execute the callback function [2]', function()
     {
         var $expected = [];
         LogInterceptor({ 'trimLinebreak': true }, function($str, $str2)
@@ -82,7 +80,7 @@ describe('LogInterceptor()', function logInterceptorTests()
         Assert.deepEqual(LogInterceptor.end(), $expected);
     });
 
-    it('should intercept and not execute the callback var ', function()
+    it('intercept and not execute the callback var ', function()
     {
         LogInterceptor({}, false);
 
@@ -92,7 +90,7 @@ describe('LogInterceptor()', function logInterceptorTests()
         Assert.deepEqual(LogInterceptor.endAll(), [['test1\n', 'test2\n']]);
     });
 
-    it('should intercept on multiple levels', function()
+    it('intercept on multiple levels', function()
     {
         // level 1
         LogInterceptor();
@@ -113,7 +111,7 @@ describe('LogInterceptor()', function logInterceptorTests()
                          ['test1\n', 'test2\n', 'test3\n']);
     });
 
-    it('should intercept on multiple levels, passdown and catch all', function()
+    it('intercept on multiple levels, passdown and catch all', function()
     {
         // level 1
         LogInterceptor();
@@ -131,8 +129,7 @@ describe('LogInterceptor()', function logInterceptorTests()
 
         var $actual = LogInterceptor.endAll();
 
-        Assert.deepEqual($actual,
-        [
+        Assert.deepEqual($actual, [
             ['test1\n', 'test2\n', 'test3\n'],
             ['test1\n', 'test2\n', 'test3\n'],
             ['test2\n', 'test3\n']
@@ -142,7 +139,7 @@ describe('LogInterceptor()', function logInterceptorTests()
 
 describe('LogInterceptor._debug()', function logInterceptorDebugTests()
 {
-    it('should write the debug message', function()
+    it('write the debug message', function()
     {
         var $logInterceptorWriter = LogInterceptor.write;
         var $actual;
@@ -164,14 +161,14 @@ describe('LogInterceptor._debug()', function logInterceptorDebugTests()
 
 describe('LogInterceptor.config()', function logInterceptorConfigTests()
 {
-    it('should add the option to the default config [1]', function()
+    it('add the option to the default config [1]', function()
     {
         LogInterceptor.config('test', true);
 
         Assert.strictEqual(LogInterceptor._config.test, true);
     });
 
-    it('should add the option to the default config [2]', function()
+    it('add the option to the default config [2]', function()
     {
         delete LogInterceptor._config.test;
 
@@ -180,7 +177,7 @@ describe('LogInterceptor.config()', function logInterceptorConfigTests()
         Assert.strictEqual(LogInterceptor._config.test, true);
     });
 
-    it('should add the option to the default config [3]', function()
+    it('add the option to the default config [3]', function()
     {
         delete LogInterceptor._config.test;
 
@@ -189,7 +186,7 @@ describe('LogInterceptor.config()', function logInterceptorConfigTests()
         Assert.strictEqual(LogInterceptor._config.test, true);
     });
 
-    it('should add the option to the default config [4]', function()
+    it('add the option to the default config [4]', function()
     {
         delete LogInterceptor._config.test;
 
@@ -198,10 +195,9 @@ describe('LogInterceptor.config()', function logInterceptorConfigTests()
         Assert.strictEqual(LogInterceptor._config.test, false);
     });
 
-    it('should extend the default config', function()
+    it('extend the default config', function()
     {
-        LogInterceptor._config =
-        {
+        LogInterceptor._config = {
             'passDown':         false,
             'stripColor':       false,
             'trimTimestamp':    false,
@@ -211,8 +207,7 @@ describe('LogInterceptor.config()', function logInterceptorConfigTests()
 
         LogInterceptor.config({ 'stripColor': true, 'test': 'test' });
 
-        Assert.deepEqual(LogInterceptor._config,
-        {
+        Assert.deepEqual(LogInterceptor._config, {
             'passDown':         false,
             'stripColor':       true,
             'trimTimestamp':    false,
@@ -222,14 +217,14 @@ describe('LogInterceptor.config()', function logInterceptorConfigTests()
         });
     });
 
-    it('should return true on success', function()
+    it('return true on success', function()
     {
         delete LogInterceptor._config.test;
 
         Assert.strictEqual(LogInterceptor.config('test', true), true);
     });
 
-    it('should return false on failure', function()
+    it('return false on failure', function()
     {
         Assert.strictEqual(LogInterceptor.config(false), false);
     });
@@ -237,7 +232,7 @@ describe('LogInterceptor.config()', function logInterceptorConfigTests()
 
 describe('LogInterceptor.end()', function logInterceptorEndTests()
 {
-    it('should return false when no session to end', function()
+    it('return false when no session to end', function()
     {
         Assert.strictEqual(LogInterceptor.end(), false);
     });
@@ -245,41 +240,8 @@ describe('LogInterceptor.end()', function logInterceptorEndTests()
 
 describe('LogInterceptor.endAll()', function logInterceptorEndAllTests()
 {
-    it('should return false when no sessions to end', function()
+    it('return false when no sessions to end', function()
     {
         Assert.strictEqual(LogInterceptor.endAll(), false);
-    });
-});
-
-describe('readme examples', function readmeExamples()
-{
-    it('should succeed the `How to use` example', function()
-    {
-        LogInterceptor();
-
-        console.log('log 1');
-        console.log('log 2');
-
-        Assert.deepEqual(LogInterceptor.end(), ['log 1\n', 'log 2\n']);
-    });
-
-    it('should succeed the `logInterceptor.endAll() API` example', function()
-    {
-        // level1
-        LogInterceptor();
-
-        console.log('log 1');
-
-        // level2: pass output down to level1
-        LogInterceptor(true);
-
-        console.log('log 2');
-        console.log('log 3');
-
-        Assert.deepEqual(LogInterceptor.endAll(),
-        [
-            ['log 1\n', 'log 2\n', 'log 3\n'],
-            ['log 2\n', 'log 3\n']
-        ]);
     });
 });
