@@ -1,6 +1,5 @@
 /**
  * log-interceptor | test/level_tests.js
- * file version: 0.00.001
  */
 'use strict';
 
@@ -9,7 +8,7 @@ var Level          = require('../lib/level.js');
 var LogInterceptor = require('../lib/index.js');
 var GulpUtil       = require('gulp-util');
 
-////////////////////////////////////////////////////////////////////////////////
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 describe('new Level()', function newLevelTests()
 {
