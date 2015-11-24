@@ -12,21 +12,21 @@ var GulpUtil       = require('gulp-util');
 
 describe('new Level()', function newLevelTests()
 {
-    it('should create a new Level object and assign a depth', function()
+    it('create a new Level object and assign a depth', function()
     {
         var $level = new Level({});
 
         Assert.strictEqual($level.depth, LogInterceptor._levels.length);
     });
 
-    it('should create a new Level object and assign options', function()
+    it('create a new Level object and assign options', function()
     {
         var $input = { 'options': 'test' };
 
         Assert.strictEqual(new Level($input).options, $input);
     });
 
-    it('should create a new Level object and assign callbackFn', function()
+    it('create a new Level object and assign callbackFn', function()
     {
         var $input = function()
         {
@@ -36,14 +36,14 @@ describe('new Level()', function newLevelTests()
         Assert.strictEqual(new Level({}, $input).callbackFn, $input);
     });
 
-    it('should create a new Level obj and set hasFormatOptions [1]', function()
+    it('create a new Level obj and set hasFormatOptions [1]', function()
     {
         var $level = new Level({});
 
         Assert.strictEqual($level.hasFormatOptions, false);
     });
 
-    it('should create a new Level obj and set hasFormatOptions [2]', function()
+    it('create a new Level obj and set hasFormatOptions [2]', function()
     {
         var $level = new Level({ 'stripColor': true });
 
@@ -53,7 +53,7 @@ describe('new Level()', function newLevelTests()
 
 describe('Level.addToLog()', function addToLogTests()
 {
-    it('should add the value to the log array', function()
+    it('add the value to the log array', function()
     {
         var $level = new Level({});
         $level.addToLog('test');
@@ -65,7 +65,7 @@ describe('Level.addToLog()', function addToLogTests()
 
 describe('Level.formatAndLog()', function formatAndLogTests()
 {
-    it('should add the value and not format it [1]', function()
+    it('add the value and not format it [1]', function()
     {
         var $level = new Level({});
         $level.formatAndLog('test');
@@ -73,14 +73,14 @@ describe('Level.formatAndLog()', function formatAndLogTests()
         Assert.deepEqual($level.log, ['test']);
     });
 
-    it('should add the value and not format it [2]', function()
+    it('add the value and not format it [2]', function()
     {
         var $level = new Level({});
 
         Assert.strictEqual($level.formatAndLog('test'), false);
     });
 
-    it('should strip the ansi color', function()
+    it('strip the ansi color', function()
     {
         var $level = new Level({ 'stripColor': true });
         $level.formatAndLog('\u001b[90mtest\u001b[39m');
@@ -88,7 +88,7 @@ describe('Level.formatAndLog()', function formatAndLogTests()
         Assert.deepEqual($level.log, ['test']);
     });
 
-    it('should trim the timestamp', function()
+    it('trim the timestamp', function()
     {
         LogInterceptor();
         GulpUtil.log('test');
@@ -99,7 +99,7 @@ describe('Level.formatAndLog()', function formatAndLogTests()
         Assert.deepEqual($level.log, ['test\n']);
     });
 
-    it('should trim the last linebreak', function()
+    it('trim the last linebreak', function()
     {
         var $level = new Level({ 'trimLinebreak': true });
         $level.formatAndLog('test\ntest2\n');
@@ -107,7 +107,7 @@ describe('Level.formatAndLog()', function formatAndLogTests()
         Assert.deepEqual($level.log, ['test\ntest2']);
     });
 
-    it('should split on linebreak', function()
+    it('split on linebreak', function()
     {
         var $level = new Level({ 'splitOnLinebreak': true });
         $level.formatAndLog('test\ntest2\n');
@@ -115,7 +115,7 @@ describe('Level.formatAndLog()', function formatAndLogTests()
         Assert.deepEqual($level.log, ['test\n', 'test2\n']);
     });
 
-    it('should split on linebreak and strip/trim everything else', function()
+    it('split on linebreak and strip/trim everything else', function()
     {
         var $level = new Level(
         {
@@ -138,7 +138,7 @@ describe('Level.formatAndLog()', function formatAndLogTests()
 
 describe('Level.callback()', function callbackTests()
 {
-    it('should call the callback function', function()
+    it('call the callback function', function()
     {
         var $actual = [];
         var $level = new Level({}, function($str1, $str2)
@@ -152,7 +152,7 @@ describe('Level.callback()', function callbackTests()
         Assert.deepEqual($actual, ['test1', ['test2']]);
     });
 
-    it('should have the utilities object as scope', function()
+    it('have the utilities object as scope', function()
     {
         var $actual;
         var $level = new Level({}, function()
@@ -168,14 +168,14 @@ describe('Level.callback()', function callbackTests()
 
 describe('Level.handle()', function handleTests()
 {
-    it('should return true to pass down the output [1]', function()
+    it('return true to pass down the output [1]', function()
     {
         var $level = new Level({ 'passDown': true });
 
         Assert.strictEqual($level.handle(''), true);
     });
 
-    it('should return true to pass down the output [2]', function()
+    it('return true to pass down the output [2]', function()
     {
         var $level = new Level({ 'passDown': false }, function()
         {
@@ -185,14 +185,14 @@ describe('Level.handle()', function handleTests()
         Assert.strictEqual($level.handle(''), true);
     });
 
-    it('should return false to pass down the output [1]', function()
+    it('return false to pass down the output [1]', function()
     {
         var $level = new Level({ 'passDown': false });
 
         Assert.strictEqual($level.handle(''), false);
     });
 
-    it('should return false to pass down the output [2]', function()
+    it('return false to pass down the output [2]', function()
     {
         var $level = new Level({ 'passDown': true }, function()
         {
