@@ -53,10 +53,10 @@ These options can be used to change the default behavior of a _log-interceptor_ 
 option | type | default | description
 ------ | ---- | --------|------------
 passDown | `boolean` | `false` | Pass the intercepted output down to the next level, or display it when the first level is reached.
-stripColors | `boolean` | `false` | Strip colors from the intercepted output.
-trimTimestamp | `boolean` | `false` | Check if the output starts with a timestamp (`[00:00:00]`). When that's the case, remove it.
-trimLinebreak | `boolean` | `false` | Trim last linebreak, this will not touch linebreaks somewhere in the middle of the output.
 splitOnLinebreak | `boolean` | `false` | Split the output and add multiple entries to the end log. Linebreaks on the end of the output will not be used to split.
+stripColors | `boolean` | `false` | Strip colors from the intercepted output.
+trimLinebreak | `boolean` | `false` | Trim last linebreak, this will not touch linebreaks somewhere in the middle of the output.
+trimTimestamp | `boolean` | `false` | Check if the output starts with a timestamp (`[00:00:00]`). When that's the case, remove it.
 
 > For more info about the above options, check the associated [utility functions][section-utilityfunctions].
 
