@@ -1,3 +1,5 @@
+# This project is deprecated and abandoned!
+
 # log-interceptor
 
 [![NPM Version][npm-img]][npm-url]
